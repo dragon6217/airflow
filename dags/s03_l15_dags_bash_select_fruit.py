@@ -4,7 +4,7 @@ from airflow.sdk import DAG
 
 
 with DAG(
-    dag_id="dags_bash_select_fruit",
+    dag_id="s03_l15_dags_bash_select_fruit",
     schedule="10 0 * * 6#1",
     start_date=pendulum.datetime(2026, 1, 1, tz="Asia/Seoul"),
     catchup=False

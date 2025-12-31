@@ -4,7 +4,7 @@ from airflow.providers.smtp.operators.smtp import EmailOperator
 
 
 with DAG(
-    dag_id="dags_email_operator",
+    dag_id="s03_l16_dags_email_operator",
     schedule="0 8 1 * *",
     start_date=pendulum.datetime(2026, 1, 1, tz="Asia/Seoul"),
     catchup=False
