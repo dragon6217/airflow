@@ -1,5 +1,5 @@
 import pendulum
-from common.common_func import regist
+from common.s04_l18_common_func import regist
 from airflow.sdk import DAG
 from airflow.providers.standard.operators.python import PythonOperator
 
