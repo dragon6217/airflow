@@ -4,7 +4,7 @@ from airflow.sdk import DAG, task
 with DAG(
     dag_id="s06_l29_dags_python_with_xcom_eg1",
     schedule="30 6 * * *",
-    start_date=pendulum.datetime(2023, 3, 1, tz="Asia/Seoul"),
+    start_date=pendulum.datetime(2026, 1, 1, tz="Asia/Seoul"),
     catchup=False
 ) as dag:
     
