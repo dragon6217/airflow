@@ -1,5 +1,5 @@
 import pendulum
-from airflow.sdk import DAG
+from airflow.sdk import DAG, task
 from airflow.providers.standard.operators.branch import BaseBranchOperator
 from airflow.providers.standard.operators.python import PythonOperator
 
@@ -50,3 +50,14 @@ with DAG(
     )
 
     custom_branch_operator >> [task_a, task_b, task_c]
+
+
+
+    @task(task_id='test_task')
+    def test_task(**kwargs):
+        from pprint import pprint
+        print('===========test_task===========')
+        pprint(kwargs)
+        print('===========test_task===========')
+
+    test_task()
