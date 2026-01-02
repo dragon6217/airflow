@@ -23,7 +23,8 @@ with DAG(
 
         },
         bash_command='echo $STATUS && '
-                    'echo $DATA &&'
+                    'echo $DATA && '
+                    '{{ti.xcom_push(key="bash_pull_pushed",value=444)}} && '
                     'echo $OPTIONS_CNT '
     )
     python_push_xcom() >> bash_pull
