@@ -11,8 +11,6 @@ with DAG(
 ) as dag:
 
     '''서울시 공공자전거 대여소 정보'''
-    # SimpleHttpOperator -> HttpOperator로 변경되었습니다.
-    # HttpOperator로 작성해주세요.
     tb_cycle_station_info = HttpOperator(
         task_id='tb_cycle_station_info',
         http_conn_id='openapi.seoul.go.kr',
