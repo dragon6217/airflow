@@ -27,7 +27,7 @@ with DAG(
     
     custom_branch_operator = CustomBranchOperator(
         task_id='python_branch_task',
-        templates_dict={'xxxxxxxxxxxxx': 'xxxxxxxxxxxxx_value'}
+        #templates_dict={'xxxxxxxxxxxxx': 'xxxxxxxxxxxxx_value'}
     )
 
     
