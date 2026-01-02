@@ -24,7 +24,7 @@ with DAG(
         },
         bash_command='echo $STATUS && '
                     'echo $DATA && '
-                    '{{ti.xcom_pull(task_ids="python_push")["data"]}} &&'
+                    '{{ti.xcom_pull(task_ids="python_push")["data"]}} && '
                     'echo $OPTIONS_CNT '
     )
     python_push_xcom() >> bash_pull
