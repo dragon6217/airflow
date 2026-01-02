@@ -39,9 +39,9 @@ with DAG(
         other_py_value = ti.xcom_pull(task_ids='python_push')['status']
         print('other_py_value:' + other_py_value)
 
+    bash_push >> python_pull_xcom()
+
     
-
-
 
     @task(task_id='python_push')
     def python_push_xcom():
@@ -61,5 +61,8 @@ with DAG(
                     '{{ti.xcom_pull(key="return_value", task_ids="python_push")}} && '
                     'echo $OPTIONS_CNT '
     )
-    bash_push >> python_pull_xcom() >> python_push_xcom() >> bash_pull
+    python_push_xcom() >> bash_pull
+
+    # 이렇게 하면 오류남
+    # bash_push >> python_pull_xcom() >> python_push_xcom() >> bash_pull
 
