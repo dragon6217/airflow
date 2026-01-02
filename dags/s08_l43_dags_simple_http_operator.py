@@ -4,8 +4,8 @@ from airflow.sdk import DAG, task
 
 
 with DAG(
-    dag_id='dags_simple_http_operator',
-    start_date=pendulum.datetime(2023, 4, 1, tz='Asia/Seoul'),
+    dag_id='s08_l43_dags_simple_http_operator',
+    start_date=pendulum.datetime(2026, 1, 1, tz='Asia/Seoul'),
     catchup=False,
     schedule=None
 ) as dag:
