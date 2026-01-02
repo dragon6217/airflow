@@ -2,7 +2,7 @@ import pendulum
 from airflow.sdk import DAG, task
 
 with DAG(
-    dag_id="dags_python_with_xcom_eg2",
+    dag_id="s06_l29_dags_python_with_xcom_eg2",
     schedule="30 6 * * *",
     start_date=pendulum.datetime(2023, 3, 1, tz="Asia/Seoul"),
     catchup=False
