@@ -59,5 +59,15 @@ with DAG(
         print('===========test_task===========')
         pprint(kwargs)
         print('===========test_task===========')
+        data_i_e=kwargs['data_interval_end']
+        print(data_i_e)
+        print(type(data_i_e))
+        print(data_i_e.strftime('%Y-%m-%d'))
+        print(type(data_i_e.strftime('%Y-%m-%d')))
+        print(data_i_e.in_timezone('Asia/Seoul'))
+        print(type(data_i_e.in_timezone('Asia/Seoul')))
+        print(data_i_e.in_timezone('Asia/Seoul').strftime('%Y-%m-%d'))
+        print(type(data_i_e.in_timezone('Asia/Seoul').strftime('%Y-%m-%d')))
+        print('===========test_task===========')
 
     test_task()
