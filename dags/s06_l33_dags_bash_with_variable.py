@@ -29,3 +29,5 @@ with DAG(
         t_dict = kwargs['templates_dict']
         return_value = t_dict['return_value']
         print('return_value:' + return_value)
+
+    python_var()
