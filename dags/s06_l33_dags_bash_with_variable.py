@@ -1,6 +1,6 @@
 import pendulum
 from airflow.providers.standard.operators.bash import BashOperator
-from airflow.sdk import DAG, Variable
+from airflow.sdk import DAG, Variable, task
 
 
 
@@ -21,3 +21,11 @@ with DAG(
         task_id="bash_var_2",
         bash_command="echo variable:{{var.value.sample_key}}"
     )
+
+    @task(task_id='python_var',
+        templates_dict={'return_value': '{{ var.value.sample_key }}'}
+    )
+    def python_var(**kwargs):
+        t_dict = kwargs['templates_dict']
+        return_value = t_dict['return_value']
+        print('return_value:' + return_value)
