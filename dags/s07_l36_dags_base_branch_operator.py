@@ -25,7 +25,10 @@ with DAG(
                 return ['task_b','task_c']
 
     
-    custom_branch_operator = CustomBranchOperator(task_id='python_branch_task')
+    custom_branch_operator = CustomBranchOperator(
+        task_id='python_branch_task',
+        templates_dict={'xxxxxxxxxxxxx': 'xxxxxxxxxxxxx_value'}
+    )
 
     
     def common_func(**kwargs):
