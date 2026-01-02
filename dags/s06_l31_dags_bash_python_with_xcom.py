@@ -56,6 +56,8 @@ with DAG(
 
         env_test_value = ti.xcom_pull(key='env_test_pushed', task_ids='bash_push')
         print('env_test_value:' + str(env_test_value))
+        other_py_value = ti.xcom_pull(task_ids='python_push')['status']
+        print('other_py_value:' + other_py_value)
 
     bash_push >> python_pull_xcom()
 
