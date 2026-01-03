@@ -9,7 +9,9 @@ class SeoulApiToCsvOperator(BaseOperator):
     def __init__(self, dataset_nm, path, file_name, base_dt=None, **kwargs):
         super().__init__(**kwargs)
         from pprint import pprint
+        print("=========init=========")
         pprint(kwargs)
+        print("=========init=========")
         self.http_conn_id = 'conn_http_openapi.seoul.go.kr'
         self.path = path
         self.file_name = file_name
@@ -19,7 +21,9 @@ class SeoulApiToCsvOperator(BaseOperator):
     def execute(self, context):
         import os
         from pprint import pprint
+        print("=========execute=========")
         pprint(context)
+        print("=========execute=========")
         
         connection = BaseHook.get_connection(self.http_conn_id)
         self.base_url = f'http://{connection.host}:{connection.port}/{self.endpoint}'
