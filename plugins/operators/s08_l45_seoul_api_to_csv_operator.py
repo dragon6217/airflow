@@ -11,6 +11,7 @@ class SeoulApiToCsvOperator(BaseOperator):
         from pprint import pprint
         print("=========init=========")
         pprint(kwargs)
+        self.op_kwargs = {"ttteeesssttt_key": "ttteeesssttt_value"}
         print("=========init=========")
         self.http_conn_id = 'conn_http_openapi.seoul.go.kr'
         self.path = path
@@ -22,6 +23,8 @@ class SeoulApiToCsvOperator(BaseOperator):
         import os
         from pprint import pprint
         print("=========execute=========")
+        for key, value in self.op_kwargs.items():
+            context[key] = value
         pprint(context)
         print("=========execute=========")
         
