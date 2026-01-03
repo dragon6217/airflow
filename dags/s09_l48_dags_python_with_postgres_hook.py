@@ -20,7 +20,8 @@ with DAG(
                 task_id = kwargs.get('ti').task_id
                 run_id = kwargs.get('ti').run_id
                 msg = 'hook insrt 수행'
-                sql = 'insert into py_opr_drct_insrt values (%s,%s,%s,%s);'
+                table_name = 'py_opr_drct_insrt_260103_s09_l48'
+                sql = f'insert into {table_name} values (%s,%s,%s,%s);'
                 cursor.execute(sql, (dag_id, task_id, run_id, msg))
                 conn.commit()
 
