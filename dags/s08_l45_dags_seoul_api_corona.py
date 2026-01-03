@@ -15,7 +15,7 @@ with DAG(
         dataset_nm='TbCorona19CountStatus',
         path='/opt/airflow/files/TbCorona19CountStatus/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}',
         file_name='TbCorona19CountStatus.csv',
-        ttteeesssttt_count="_-~^~-_-~^~-_-~^~-_-~^~-_-~^~-_count"
+        #ttteeesssttt_count="_-~^~-_-~^~-_-~^~-_-~^~-_-~^~-_count"
     )
     
     '''서울시 코로나19 백신 예방접종 현황'''
@@ -24,7 +24,7 @@ with DAG(
         dataset_nm='tvCorona19VaccinestatNew',
         path='/opt/airflow/files/tvCorona19VaccinestatNew/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}',
         file_name='tvCorona19VaccinestatNew.csv',
-        ttteeesssttt_vaccine="_-~^~-_-~^~-_-~^~-_-~^~-_-~^~-_vaccine"
+        #ttteeesssttt_vaccine="_-~^~-_-~^~-_-~^~-_-~^~-_-~^~-_vaccine"
     )
 
     tb_corona19_count_status >> tv_corona19_vaccine_stat_new
