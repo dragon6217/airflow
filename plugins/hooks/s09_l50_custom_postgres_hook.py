@@ -1,4 +1,5 @@
 from airflow.hooks.base import BaseHook
+from contextlib import closing
 import psycopg2
 import pandas as pd
 
@@ -6,24 +7,32 @@ class CustomPostgresHook(BaseHook):
 
     def __init__(self, postgres_conn_id, **kwargs):
         self.postgres_conn_id = postgres_conn_id
+        # Connection 정보 초기화 (커넥션 생성 없이 정보만 가져옴)
+        airflow_conn = BaseHook.get_connection(self.postgres_conn_id)
+        self._conn_info = {
+            'host': airflow_conn.host,
+            'user': airflow_conn.login,
+            'password': airflow_conn.password,
+            'dbname': airflow_conn.schema,
+            'port': airflow_conn.port
+        }
 
     def get_conn(self):
-        airflow_conn = BaseHook.get_connection(self.postgres_conn_id)
-        self.host = airflow_conn.host
-        self.user = airflow_conn.login
-        self.password = airflow_conn.password
-        self.dbname = airflow_conn.schema
-        self.port = airflow_conn.port
-
-        self.postgres_conn = psycopg2.connect(host=self.host, user=self.user, password=self.password, dbname=self.dbname, port=self.port)
-        return self.postgres_conn
+        """psycopg2 커넥션 반환 (contextlib.closing과 함께 사용 권장)"""
+        return psycopg2.connect(
+            host=self._conn_info['host'],
+            user=self._conn_info['user'],
+            password=self._conn_info['password'],
+            dbname=self._conn_info['dbname'],
+            port=self._conn_info['port']
+        )
 
     def bulk_load(self, table_name, file_name, delimiter: str, is_header: bool, is_replace: bool):
         from sqlalchemy import create_engine
 
         self.log.info('적재 대상파일:' + file_name)
         self.log.info('테이블 :' + table_name)
-        self.get_conn()
+        
         header = 0 if is_header else None                       # is_header = True면 0, False면 None
         if_exists = 'replace' if is_replace else 'append'       # is_replace = True면 replace, False면 append
         file_df = pd.read_csv(file_name, header=header, delimiter=delimiter)
@@ -37,11 +46,16 @@ class CustomPostgresHook(BaseHook):
                 continue 
                 
         self.log.info('적재 건수:' + str(len(file_df)))
-        uri = f'postgresql://{self.user}:{self.password}@{self.host}/{self.dbname}'
+        uri = f'postgresql://{self._conn_info["user"]}:{self._conn_info["password"]}@{self._conn_info["host"]}:{self._conn_info["port"]}/{self._conn_info["dbname"]}'
         engine = create_engine(uri)
-        file_df.to_sql(name=table_name,
-                            con=engine,
-                            schema='public',
-                            if_exists=if_exists,
-                            index=False
-                        )
+        
+        try:
+            file_df.to_sql(name=table_name,
+                                con=engine,
+                                schema='public',
+                                if_exists=if_exists,
+                                index=False
+                            )
+        finally:
+            # SQLAlchemy engine 명시적으로 dispose하여 커넥션 풀 해제
+            engine.dispose()
