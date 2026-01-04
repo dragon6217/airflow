@@ -19,6 +19,6 @@ with DAG(
         task_id='insrt_postgres',
         python_callable=insrt_postgres,
         op_kwargs={'postgres_conn_id': 'conn_db_postgres_260103_airflow',
-                   'tbl_nm':'TbCorona19CountStatus_bulk1',
+                   'tbl_nm':'TbCorona19CountStatus_bulk1_{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash}}',
                    'file_nm':'/opt/airflow/files/TbCorona19CountStatus/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash}}/TbCorona19CountStatus.csv'}
     )
