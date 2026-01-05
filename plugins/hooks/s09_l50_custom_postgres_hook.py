@@ -19,13 +19,7 @@ class CustomPostgresHook(BaseHook):
 
     def get_conn(self):
         """psycopg2 커넥션 반환 (contextlib.closing과 함께 사용 권장)"""
-        return psycopg2.connect(
-            host=self._conn_info['host'],
-            user=self._conn_info['user'],
-            password=self._conn_info['password'],
-            dbname=self._conn_info['dbname'],
-            port=self._conn_info['port']
-        )
+        return psycopg2.connect(**self._conn_info)
 
     def bulk_load(self, table_name, file_name, delimiter: str, is_header: bool, is_replace: bool):
         from sqlalchemy import create_engine
