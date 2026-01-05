@@ -35,8 +35,8 @@ with DAG(
                         else 
                               exit 1
                         fi''',
-        poke_interval=60*3,    # 3분
-        timeout=60*9,          #9분
+        poke_interval=60*1,    # 3분
+        timeout=60*3,          #9분
         mode='reschedule',
         soft_fail=True
     )
