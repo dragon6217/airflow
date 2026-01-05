@@ -5,8 +5,8 @@ from airflow.sdk import DAG
 
 
 with DAG(
-    dag_id='dags_bash_sensor',
-    start_date=pendulum.datetime(2023,4,1, tz='Asia/Seoul'),
+    dag_id='s10_l53_dags_bash_sensor',
+    start_date=pendulum.datetime(2026,1,1, tz='Asia/Seoul'),
     schedule='0 6 * * *',
     catchup=False
 ) as dag:
