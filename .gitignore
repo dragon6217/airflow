@@ -6,6 +6,7 @@ files/
 my_custom_image/
 my_training_files/
 dags/s09_l48_dags_python_with_postgres.py
+zzz*
 
 # Python
 __pycache__/
