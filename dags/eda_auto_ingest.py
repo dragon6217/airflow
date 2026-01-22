@@ -113,7 +113,7 @@ with DAG(
     dag_id='eda_auto_ingest',
     default_args=default_args,
     description='Auto-ingest EDA timing reports to database',
-    schedule_interval=timedelta(minutes=1),
+    schedule=timedelta(minutes=1),  # Changed from schedule_interval to schedule (Airflow 3.x)
     start_date=datetime(2026, 1, 20),
     catchup=False,
     tags=['eda', 'timing', 'auto-ingest'],
